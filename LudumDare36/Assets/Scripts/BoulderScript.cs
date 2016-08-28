@@ -5,7 +5,7 @@ public class BoulderScript : MonoBehaviour
 {
     Rigidbody myRigidbody;
 
-    public float forceRate = 5f;
+    public float forceRate;
 
     void Start()
     {
