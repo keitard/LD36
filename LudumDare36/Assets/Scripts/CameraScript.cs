@@ -14,9 +14,11 @@ public class CameraScript : MonoBehaviour
         offset = myTransform.position - target.position;
     }
 
-    void LateUpdate()
+    void Update()
     {
         Vector3 desiredPosition = target.position + offset;
-        myTransform.DOMove(desiredPosition, Time.deltaTime);
+        myTransform.DOMove(desiredPosition, 0.5f).SetEase(Ease.Linear);
+        
+        myTransform.DOLookAt(target.position, 0.25f, AxisConstraint.None);
     }
 }
