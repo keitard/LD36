@@ -3,20 +3,36 @@ using System.Collections;
 
 public class TombRaiderSpawner : MonoBehaviour
 {
-    public ObjectPooler objectPooler;
+    public GameObject[] tombRaiders;
+
     public Transform[] spawnerTransform;
 
-    public float timing = 0;
+    float spawnTime = 5f;
+    float spawnSpeed = 1.5f;
+
+    void Awake()
+    {
+        foreach(GameObject tombRaider in tombRaiders)
+        {
+            PoolManager.Instance.CreatePool(tombRaider, 30);
+        }
+    }
 
     void Update()
     {
-        timing += Time.deltaTime;
-        if(timing >= 3f)
+        spawnTime -= Time.deltaTime * spawnSpeed;
+        if(spawnTime <= 0f)
         {
-            GameObject tombRaider = objectPooler.GetPooledObject();
-            tombRaider.transform.position = spawnerTransform[Random.Range(0, spawnerTransform.Length)].position;
-            tombRaider.SetActive(true);
-            timing = 0;
+            int spawner = Random.Range(0, spawnerTransform.Length);
+            PoolManager.Instance.ReuseObject(tombRaiders[Random.Range(0, tombRaiders.Length)], spawnerTransform[spawner].position, spawnerTransform[spawner].rotation);
+            spawnTime = 10f;
+        }
+
+        GameManager.Instance.TimeToIncrementSpawnSpeed += Time.deltaTime;
+        if(GameManager.Instance.TimeToIncrementSpawnSpeed >= 10f)
+        {
+            spawnSpeed += Random.Range(0.5f, 1.5f);
+            GameManager.Instance.TimeToIncrementSpawnSpeed = 0;
         }
     }
 

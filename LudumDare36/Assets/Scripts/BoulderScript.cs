@@ -20,4 +20,12 @@ public class BoulderScript : MonoBehaviour
         myRigidbody.AddForce(new Vector3(horizontal, 0, vertical) * forceRate, ForceMode.Force);
     }
 
+    void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "TombRaider")
+        {
+            other.gameObject.SetActive(false);
+            GameManager.Instance.Score++;
+        }
+    }
 }
