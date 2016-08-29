@@ -49,10 +49,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool isGameStarted;
     public bool IsGameStarted
     {
         get;
         set;
+    }
+    public bool IsGameOver
+    {
+        get; set;
     }
 }

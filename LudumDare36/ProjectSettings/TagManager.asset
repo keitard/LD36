@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - TombRaider
+  - GoldenMonkey
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Boundaries
   - Boulder
   - TombRaiders
-  - 
+  - GoldenMonkey
   - 
   - 
   - 

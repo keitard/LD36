@@ -16,12 +16,12 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.IsGameStarted)
-        {
-            Vector3 desiredPosition = target.position + offset;
-            myTransform.DOMove(desiredPosition, 0.5f).SetEase(Ease.Linear);
+        if (!GameManager.Instance.IsGameStarted)
+            return;
 
-            myTransform.DOLookAt(target.position, 0.25f, AxisConstraint.None);
-        }
+        Vector3 desiredPosition = target.position + offset;
+        myTransform.DOMove(desiredPosition, 0.5f).SetEase(Ease.Linear);
+
+        myTransform.DOLookAt(target.position, 0.25f, AxisConstraint.None);
     }
 }

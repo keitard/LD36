@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using DG.Tweening;
 
 public class TombRaiderScript : MonoBehaviour
 {
@@ -9,30 +8,39 @@ public class TombRaiderScript : MonoBehaviour
     Rigidbody myRigidbody;
 
 
-    public float speed = 5f;
+    public float speed = 3f;
 
     void Awake()
     {
         myTransform = transform;
         myRigidbody = GetComponent<Rigidbody>();
-        target = GameObject.Find("GoldenMonkeyTreasure").transform;
+        target = GameObject.Find("GoldenMonkey").transform;
     }
 
-    void OnEnable()
-    {
-        myRigidbody.DOMove(new Vector3(target.position.x, 0.75f, target.position.z), speed).SetEase(Ease.Linear).SetAutoKill(false).SetSpeedBased();
-        myTransform.DOLookAt(new Vector3(target.position.x, myTransform.position.y, target.position.z), Time.deltaTime);
-    }
-    
     void Update()
     {
-        //myTransform.LookAt(new Vector3(target.position.x, myTransform.position.y, target.position.z));
+        if(GameManager.Instance.IsGameStarted)
+        {
+            myTransform.LookAt(target.position);
+            myRigidbody.velocity = myTransform.forward * speed;
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void OnDisable()
     {
-        myRigidbody.DOKill();
         myTransform.position = Vector3.zero;
         myTransform.eulerAngles = Vector3.zero;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "GoldenMonkey")
+        {
+            GameManager.Instance.IsGameOver = true;
+        }
     }
 }
