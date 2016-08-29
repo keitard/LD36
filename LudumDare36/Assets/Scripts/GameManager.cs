@@ -24,14 +24,14 @@ public class GameManager : MonoBehaviour
     }
 
     int highScore;
-    public int HighScore
+    public int Highscore
     {
-        get { return PlayerPrefs.GetInt("HighScore"); }
+        get { return PlayerPrefs.GetInt("Highscore"); }
         set
         {
-            if (value > PlayerPrefs.GetInt("HighScore"))
+            if (value > PlayerPrefs.GetInt("Highscore"))
             {
-                PlayerPrefs.SetInt("HighScore", value);
+                PlayerPrefs.SetInt("Highscore", value);
             }
         }
     }
@@ -47,5 +47,12 @@ public class GameManager : MonoBehaviour
         {
             timeToIncrementSpawnSpeed = value;
         }
+    }
+
+    bool isGameStarted;
+    public bool IsGameStarted
+    {
+        get;
+        set;
     }
 }
