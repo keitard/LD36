@@ -47,10 +47,10 @@ public class GUIManager : MonoBehaviour
             Pause();
         }
 
-        if(Input.GetKeyDown("delete"))
-        {
-            PlayerPrefs.DeleteAll();
-        }
+        //if(Input.GetKeyDown("delete"))
+        //{
+        //    PlayerPrefs.DeleteAll();
+        //}
 
         if(GameManager.Instance.Score != data.currentScore)
         {
@@ -82,7 +82,7 @@ public class GUIManager : MonoBehaviour
         if(GameManager.Instance.IsGameOver)
         {
             Camera.main.GetComponent<BlurOptimized>().enabled = true;
-            gameOverDataText.text = "Your score:\n" + data.currentScore + "\nHighscore:\n" + data.currentHighscore;
+            gameOverDataText.text = "Your score: " + data.currentScore + "\nHighscore: " + data.currentHighscore;
             GameManager.Instance.IsGameStarted = false;
             player.SetActive(false);
             gameOverHUD.SetActive(true);
